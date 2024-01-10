@@ -2,7 +2,6 @@
 """Contains the HBNB class"""
 import cmd
 from models import storage
-from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """contains the entry point of the command interpreter"""
@@ -11,20 +10,20 @@ class HBNBCommand(cmd.Cmd):
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
         from models.base_model import BaseModel
-        # from models.user import User
-        # from models.state import State
-        # from models.city import City
-        # from models.amenity import Amenity
-        # from models.place import Place
-        # from models.review import Review
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
 
         classes = {"BaseModel": BaseModel,
-                #    "User": User,
-                #    "State": State,
-                #    "City": City,
-                #    "Amenity": Amenity,
-                #    "Place": Place,
-                #    "Review": Review
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review
                    }
         return classes
 
@@ -44,7 +43,6 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             my_obj_class = self.classes()[args_list[0]]
-            # print(my_obj_class)
             cls_instance = my_obj_class()
             storage.save()
             print(cls_instance.id)
@@ -63,16 +61,11 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
             return
         try:
-            # my_obj_class = self.classes()[args_list[0]]
             self.classes()[args_list[0]]
-            # print(my_obj_class)
             obj_dict = storage.all()
             for k, v in obj_dict.items():
-                # if args_list[1] in v:
                 my_id = k.split('.')
                 if my_id[0] == args_list[0] and my_id[1] == args_list[1]:
-                    # my_obj = my_obj_class(**v)
-                    # print(my_obj)
                     print(v)
                     return
             print('** no instance found **')
@@ -92,9 +85,7 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             self.classes()[args_list[0]]
-            # print(my_obj_class)
             obj_dict = storage.all()
-            # for k, v in obj_dict.items():
             for k in obj_dict.keys():
                 my_id = k.split('.')
                 if args_list[0] == my_id[0] and args_list[1] == my_id[1]:
@@ -112,20 +103,36 @@ class HBNBCommand(cmd.Cmd):
         args_list = args.split()
         obj_dict = storage.all()
         if len(args_list) == 0:
-            for v in obj_dict.values():
-                print(v)
+            len_obj_dict = len(obj_dict)
+            if len_obj_dict > 0:
+                print("[", end="")
+                index = 0
+                for v in obj_dict.values():
+                    if index + 1 < len_obj_dict:
+                        print("\"", v, sep="", end="\", ")
+                    else:
+                        print(v, end="\"")
+                    index += 1
+                print("]")
             return
-        # if len(args_list) < 2:
-        #     print('** instance id missing **')
-        #     return
+
         try:
             self.classes()[args_list[0]]
-            # print(my_obj_class)
+            obj_list = []
             for k, v in obj_dict.items():
                 if k.split('.')[0] == args_list[0]:
-                    # my_obj = my_obj_class(**v)
-                    print(v)
-            # print('** no instance found **')
+                    obj_list.append(v)
+            len_obj_list = len(obj_list)
+            if len_obj_list > 0:
+                print("[", end="")
+                index = 0
+                for v in obj_list:
+                    if index + 1 < len_obj_list:
+                        print("\"", v, sep="", end="\", ")
+                    else:
+                        print(v, end="\"")
+                    index += 1
+                print("]")
         except KeyError as e:
             print('** class doesn\'t exist **')
             return
