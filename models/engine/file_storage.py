@@ -11,21 +11,21 @@ class FileStorage():
 
     def all(self):
         """Returns the objects attribute"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Adds an object to the object attr of the instance"""
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
-        if self.__objects is None or len(self.__objects) == 0:
+        if FileStorage.__objects is None or len(FileStorage.__objects) == 0:
             return
 
         json_obj = {}
-        for i in self.__objects:
-            json_obj[i] = self.__objects[i].to_dict()
-        with open("{}".format(self.__file_path), "w", encoding="utf-8") as f:
+        for i in FileStorage.__objects:
+            json_obj[i] = FileStorage.__objects[i].to_dict()
+        with open("{}".format(FileStorage.__file_path), "w", encoding="utf-8") as f:
             f.write(dumps(json_obj))
 
     def classes(self):
@@ -53,11 +53,11 @@ class FileStorage():
         (only if the JSON file (__file_path) exists"""
 
         try:
-            with open("{}".format(self.__file_path), "r") as myFile:
+            with open("{}".format(FileStorage.__file_path), "r") as myFile:
                 file_content = myFile.read()
                 if file_content is not None:
                     obj_dict = loads(file_content)
-                self.__objects = {k: self.classes()[v['__class__']](**v)
+                FileStorage.__objects = {k: FileStorage.classes()[v['__class__']](**v)
                                   for k, v in obj_dict.items()}
         except FileNotFoundError as e:
             pass

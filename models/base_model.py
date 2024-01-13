@@ -2,7 +2,7 @@
 """A module that contains the base model class"""
 from datetime import datetime
 import uuid
-from . import storage
+from models import storage
 
 
 class BaseModel():
@@ -23,16 +23,6 @@ class BaseModel():
                         value, '%Y-%m-%dT%H:%M:%S.%f')
                 else:
                     self.__dict__[key] = value
-        # else:
-        #     for key, value in kwargs.items():
-        #         if not key == "__class__":
-        #             if key == 'created_at' or key == 'updated_at':
-        #                 setattr(self, key,
-        #                         datetime.strptime(value,
-        #                                           '%Y-%m-%dT%H:%M:%S.%f'))
-        #             else:
-        #                 setattr(self, key, value)
-            
 
     def __str__(self):
         """Returns an informal representation of the class"""
