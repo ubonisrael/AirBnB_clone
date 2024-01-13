@@ -31,9 +31,15 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, args):
         """quits the console"""
         return True
-
-    # aliasing
-    do_EOF = do_quit
+    
+    def do_EOF(self, args):
+        """handles the EOF character"""
+        print()
+        return True
+    
+    def do_emptyline(self):
+        """Empty line, nothing happens"""
+        pass
 
     def do_create(self, args):
         """Creates a new instance of a model, saves it
