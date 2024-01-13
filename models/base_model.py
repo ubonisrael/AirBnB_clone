@@ -18,21 +18,25 @@ class BaseModel():
             for key, value in kwargs.items():
                 if not key == "__class__":
                     if key == 'created_at' or key == 'updated_at':
-                        setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                        setattr(self, key,
+                                datetime.strptime(value,
+                                                  '%Y-%m-%dT%H:%M:%S.%f'))
                     else:
                         setattr(self, key, value)
 
     def __str__(self):
         """Returns an informal representation of the class"""
-        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-    
+        return "[{:s}] ({:s}) {}".format(self.__class__.__name__,
+                                         self.id, self.__dict__)
+
     def save(self):
         """Updates the updated_at attr with the current time"""
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """returns a dictionary containing all keys/values of __dict__ of the instance"""
+        """returns a dictionary containing all
+        keys/values of __dict__ of the instance"""
         obj_dict = {}
         for k, v in self.__dict__.items():
             if k == 'created_at' or k == 'updated_at':

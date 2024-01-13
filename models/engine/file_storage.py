@@ -2,15 +2,17 @@
 """Contains the FileStorage class"""
 from json import dumps, loads
 
+
 class FileStorage():
-    """a class that serializes instances to a JSON file and deserializes JSON file to instances"""
+    """a class that serializes instances to a JSON file and
+    deserializes JSON file to instances"""
     __objects = {}
     __file_path = "file.json"
 
     def all(self):
         """Returns the objects attribute"""
         return self.__objects
-    
+
     def new(self, obj):
         """Adds an object to the object attr of the instance"""
         self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
@@ -47,14 +49,15 @@ class FileStorage():
         return classes
 
     def reload(self):
-        """deserializes the JSON file to __objects (only if the JSON file (__file_path) exists"""
+        """deserializes the JSON file to __objects
+        (only if the JSON file (__file_path) exists"""
 
         try:
             with open("{}".format(self.__file_path), "r") as myFile:
                 file_content = myFile.read()
                 if file_content is not None:
                     obj_dict = loads(file_content)
-            self.__objects = {k: self.classes()[v['__class__']](**v)
-                        for k, v in obj_dict.items()}
+                self.__objects = {k: self.classes()[v['__class__']](**v)
+                                  for k, v in obj_dict.items()}
         except FileNotFoundError as e:
             pass
