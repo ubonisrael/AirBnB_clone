@@ -39,7 +39,8 @@ class TestBaseModel_Init(unittest.TestCase):
     def test_instantiation_with_args_and_kwargs(self):
         date = datetime.now()
         date_iso = date.isoformat()
-        obj = BaseModel("12", id="345", created_at=date_iso, updated_at=date_iso)
+        obj = BaseModel("12", id="345",
+                        created_at=date_iso, updated_at=date_iso)
         self.assertEqual(obj.id, "345")
         self.assertEqual(obj.created_at, date)
         self.assertEqual(obj.updated_at, date)
@@ -72,9 +73,9 @@ class TestBaseModel_Init(unittest.TestCase):
         obj2 = BaseModel()
         self.assertNotEqual(obj1.updated_at, obj2.updated_at)
 
-
     def test_newly_created_instance_is_stored_in_storage(self):
-        """tests that a newly created instance has been added to file storage"""
+        """tests that a newly created instance has
+        been added to file storage"""
         self.assertIn(BaseModel(), storage.all().values())
 
     @staticmethod

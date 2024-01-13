@@ -72,9 +72,9 @@ class TestPlace_Init(unittest.TestCase):
         obj2 = Place()
         self.assertNotEqual(obj1.updated_at, obj2.updated_at)
 
-
     def test_newly_created_instance_is_stored_in_storage(self):
-        """tests that a newly created instance has been added to file storage"""
+        """tests that a newly created instance has
+        been added to file storage"""
         self.assertIn(Place(), storage.all().values())
 
     @staticmethod
