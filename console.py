@@ -29,21 +29,25 @@ class HBNBCommand(cmd.Cmd):
         return classes
 
     def do_quit(self, args):
-        """quits the console"""
+        """quits the console
+        """
         return True
     
     def do_EOF(self, args):
-        """handles the EOF character"""
+        """handles the EOF character
+        """
         print()
         return True
     
-    def do_emptyline(self):
-        """Empty line, nothing happens"""
+    def emptyline(self):
+        """Empty line, nothing happens
+        """
         pass
 
     def do_create(self, args):
         """Creates a new instance of a model, saves it
-        (to the JSON file) and prints the id"""
+        (to the JSON file) and prints the id
+        """
         args_list = args.split()
         if len(args_list) == 0:
             print('** class name missing **')
@@ -59,7 +63,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         """ Prints the string representation of an instance
-        based on the class name and id"""
+        based on the class name and id
+        """
         args_list = args.split()
         if len(args_list) == 0:
             print('** class name missing **')
@@ -82,7 +87,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id
-        (save the change into the JSON file)"""
+        (save the change into the JSON file)
+        """
         args_list = args.split()
         if len(args_list) == 0:
             print('** class name missing **')
@@ -106,7 +112,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Updates an instance based on the class name and id by adding or
-        updating attribute (save the change into the JSON file)"""
+        updating attribute (save the change into the JSON file)
+        """
         args_list = args.split()
         obj_dict = storage.all()
         if len(args_list) == 0:
@@ -146,7 +153,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """Updates an instance based on the class name and id by adding or
-        updating attribute (save the change into the JSON file)"""
+        updating attribute (save the change into the JSON file)
+        """
         args_list = args.split()
         args_len = len(args_list)
         if args_len == 0:
