@@ -7,22 +7,32 @@ from . import storage
 
 class BaseModel():
     """This class defines all common attributes/methods for other classes"""
+
     def __init__(self, *args, **kwargs):
         """Initializes the base model class"""
-        if len(kwargs) < 1:
+        if kwargs is None or kwargs == {}:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             storage.new(self)
         else:
             for key, value in kwargs.items():
-                if not key == "__class__":
-                    if key == 'created_at' or key == 'updated_at':
-                        setattr(self, key,
-                                datetime.strptime(value,
-                                                  '%Y-%m-%dT%H:%M:%S.%f'))
-                    else:
-                        setattr(self, key, value)
+                # if not key == "__class__":
+                if key == 'created_at' or key == 'updated_at':
+                    self.__dict__[key] = datetime.strptime(
+                        value, '%Y-%m-%dT%H:%M:%S.%f')
+                else:
+                    self.__dict__[key] = value
+        # else:
+        #     for key, value in kwargs.items():
+        #         if not key == "__class__":
+        #             if key == 'created_at' or key == 'updated_at':
+        #                 setattr(self, key,
+        #                         datetime.strptime(value,
+        #                                           '%Y-%m-%dT%H:%M:%S.%f'))
+        #             else:
+        #                 setattr(self, key, value)
+            
 
     def __str__(self):
         """Returns an informal representation of the class"""
