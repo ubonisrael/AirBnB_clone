@@ -17,12 +17,12 @@ class BaseModel():
             storage.new(self)
         else:
             for key, value in kwargs.items():
-                # if not key == "__class__":
-                if key == 'created_at' or key == 'updated_at':
-                    self.__dict__[key] = datetime.strptime(
-                        value, '%Y-%m-%dT%H:%M:%S.%f')
-                else:
-                    self.__dict__[key] = value
+                if not key == "__class__":
+                    if key == 'created_at' or key == 'updated_at':
+                        self.__dict__[key] = datetime.strptime(
+                            value, '%Y-%m-%dT%H:%M:%S.%f')
+                    else:
+                        self.__dict__[key] = value
 
     def __str__(self):
         """Returns an informal representation of the class"""

@@ -32,13 +32,13 @@ class HBNBCommand(cmd.Cmd):
         """quits the console
         """
         return True
-    
+
     def do_EOF(self, args):
         """handles the EOF character
         """
         print()
         return True
-    
+
     def emptyline(self):
         """Empty line, nothing happens
         """
