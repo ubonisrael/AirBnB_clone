@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Contains the user class"""
+"""Contains functionality for creating the user class"""
 from models.base_model import BaseModel
 
 
