@@ -13,9 +13,9 @@ class HBNBCommand(cmd.Cmd):
         """Default action if the input does not
         match any commands
         """
-        return self._precmd(line)
+        return self.precmd(line)
 
-    def _precmd(self, line):
+    def precmd(self, line):
         """Checks the input for the class.() syntax"""
         pattern = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not pattern:
@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
                 attr_and_value = (match_attr_and_value.group(
                     1) or "") + " " + (match_attr_and_value.group(2) or "")
         command = method + " " + class_name + " " + uid + " " + attr_and_value
-        self.onecmd(command)
+        return command
 
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
