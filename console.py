@@ -1,12 +1,49 @@
 #!/usr/bin/python3
 """Contains the HBNB class"""
 import cmd
+import re
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """contains the entry point of the command interpreter"""
     prompt = "(hbnb) "
+
+    def default(self, line):
+        """Default action if the input does not
+        match any commands
+        """
+        return self._precmd(line)
+
+    def _precmd(self, line):
+        """Checks the input for the class.() syntax"""
+        pattern = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
+        if not pattern:
+            return line
+        class_name = pattern.group(1)
+        method = pattern.group(2)
+        args = pattern.group(3)
+        uid_and_args = re.search('^"([^"]*)"(?:, (.*))?$', args)
+        if uid_and_args:
+            uid = uid_and_args.group(1)
+            attr_or_dict = uid_and_args.group(2)
+        else:
+            uid = args
+            attr_or_dict = False
+
+        attr_and_value = ""
+        if method == "update" and attr_or_dict:
+            match_dict = re.search('^({.*})$', attr_or_dict)
+            if match_dict:
+                self.update_dict(class_name, uid, match_dict.group(1))
+                return ""
+            match_attr_and_value = re.search(
+                '^(?:"([^"]*)")?(?:, (.*))?$', attr_or_dict)
+            if match_attr_and_value:
+                attr_and_value = (match_attr_and_value.group(
+                    1) or "") + " " + (match_attr_and_value.group(2) or "")
+        command = method + " " + class_name + " " + uid + " " + attr_and_value
+        self.onecmd(command)
 
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
@@ -110,9 +147,26 @@ class HBNBCommand(cmd.Cmd):
             print('** class doesn\'t exist **')
             return
 
+    def do_count(self, args):
+        """ Retrieves and prints the number of instances
+        of a model class
+        """
+        args_list = args.split()
+        obj_dict = storage.all()
+        count = 0
+        try:
+            self.classes()[args_list[0]]
+            for k, v in obj_dict.items():
+                if k.split('.')[0] == args_list[0]:
+                    count += 1
+            print(count)
+        except KeyError as e:
+            print('** class doesn\'t exist **')
+            return
+
     def do_all(self, args):
-        """ Updates an instance based on the class name and id by adding or
-        updating attribute (save the change into the JSON file)
+        """ Prints all string representation of all instances
+        based or not on the class name
         """
         args_list = args.split()
         obj_dict = storage.all()
