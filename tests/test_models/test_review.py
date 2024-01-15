@@ -101,6 +101,18 @@ class TestReview_Init(unittest.TestCase):
         self.assertIn("'created_at': " + date_repr, objstr)
         self.assertIn("'updated_at': " + date_repr, objstr)
 
+    def test_text_attr_exists(self):
+        obj = Review()
+        self.assertTrue(hasattr(obj, 'text'))
+
+    def test_place_id_attr_exists(self):
+        obj = Review()
+        self.assertTrue(hasattr(obj, 'place_id'))
+
+    def test_user_id_attr_exists(self):
+        obj = Review()
+        self.assertTrue(hasattr(obj, 'user_id'))
+
 
 class TestReview_Save(unittest.TestCase):
     """Tests the save method of the Review class"""

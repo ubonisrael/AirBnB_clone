@@ -101,6 +101,50 @@ class TestPlace_Init(unittest.TestCase):
         self.assertIn("'created_at': " + date_repr, objstr)
         self.assertIn("'updated_at': " + date_repr, objstr)
 
+    def test_name_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'name'))
+
+    def test_city_id_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'city_id'))
+
+    def test_state_id_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'state_id'))
+
+    def test_desc_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'description'))
+
+    def test_number_rooms_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'number_rooms'))
+
+    def test_number_bathrooms_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'number_bathrooms'))
+
+    def test_max_guest_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'max_guest'))
+
+    def test_price_by_night_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'price_by_night'))
+
+    def test_latitude_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'latitude'))
+
+    def test_longitude_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'longitude'))
+
+    def test_amenity_attr_exists(self):
+        obj = Place()
+        self.assertTrue(hasattr(obj, 'amenity_ids'))
+
 
 class TestPlace_Save(unittest.TestCase):
     """Tests the save method of the Place class"""

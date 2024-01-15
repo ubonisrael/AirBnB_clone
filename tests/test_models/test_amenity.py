@@ -44,6 +44,10 @@ class TestAmenity_Init(unittest.TestCase):
         self.assertEqual(obj.created_at, date)
         self.assertEqual(obj.updated_at, date)
 
+    def test_name_attr_exists(self):
+        obj = Amenity()
+        self.assertTrue(hasattr(obj, 'name'))
+
     def test_instance_id_unique(self):
         "tests that an instance id is unique"
         obj1 = Amenity()

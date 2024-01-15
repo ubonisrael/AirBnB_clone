@@ -101,6 +101,14 @@ class TestCity_Init(unittest.TestCase):
         self.assertIn("'created_at': " + date_repr, objstr)
         self.assertIn("'updated_at': " + date_repr, objstr)
 
+    def test_name_attr_exists(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'name'))
+
+    def test_state_id_attr_exists(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'state_id'))
+
 
 class TestCity_Save(unittest.TestCase):
     """Tests the save method of the City class"""

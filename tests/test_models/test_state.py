@@ -89,6 +89,10 @@ class TestState_Init(unittest.TestCase):
         sys.stdout = sys.__stdout__
         return capture
 
+    def test_name_attr_exists(self):
+        obj = State()
+        self.assertTrue(hasattr(obj, 'name'))
+
     def test_str_method(self):
         date = datetime.now()
         date_repr = repr(date)
