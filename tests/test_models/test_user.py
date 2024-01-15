@@ -34,11 +34,11 @@ class TestUser_Init(unittest.TestCase):
 
     def test_lastname_attr_exists(self):
         obj = User()
-        self.assertTrue(hasattr(obj, 'lastname'))
+        self.assertTrue(hasattr(obj, 'last_name'))
 
     def test_firstname_attr_exists(self):
         obj = User()
-        self.assertTrue(hasattr(obj, 'firstname'))
+        self.assertTrue(hasattr(obj, 'first_name'))
 
     def test_password_attr_exists(self):
         obj = User()

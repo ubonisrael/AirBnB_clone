@@ -148,20 +148,8 @@ class TestFileStorage_methods(unittest.TestCase):
             models.storage.save(None)
 
     def test_reload_exists(self):
-        bm = BaseModel()
-        us = User()
-        st = State()
-        pl = Place()
-        cy = City()
-        am = Amenity()
-        rv = Review()
-        self.assertTrue(hasattr(bm, 'reload'))
-        self.assertTrue(hasattr(us, 'reload'))
-        self.assertTrue(hasattr(st, 'reload'))
-        self.assertTrue(hasattr(pl, 'reload'))
-        self.assertTrue(hasattr(cy, 'reload'))
-        self.assertTrue(hasattr(am, 'reload'))
-        self.assertTrue(hasattr(rv, 'reload'))
+        fs = FileStorage()
+        self.assertTrue(hasattr(fs, 'reload'))
 
     def test_reload(self):
         bm = BaseModel()

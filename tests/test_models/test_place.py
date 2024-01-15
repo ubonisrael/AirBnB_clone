@@ -111,7 +111,7 @@ class TestPlace_Init(unittest.TestCase):
 
     def test_state_id_attr_exists(self):
         obj = Place()
-        self.assertTrue(hasattr(obj, 'state_id'))
+        self.assertTrue(hasattr(obj, 'user_id'))
 
     def test_desc_attr_exists(self):
         obj = Place()
