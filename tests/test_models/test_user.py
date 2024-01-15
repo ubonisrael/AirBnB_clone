@@ -28,6 +28,22 @@ class TestUser_Init(unittest.TestCase):
         self.assertNotIn('abc123', obj.__dict__.values())
         self.assertNotIn(repr(dt), obj.__dict__.values())
 
+    def test_email_attr_exists(self):
+        obj = User()
+        self.assertTrue(hasattr(obj, 'email'))
+
+    def test_lastname_attr_exists(self):
+        obj = User()
+        self.assertTrue(hasattr(obj, 'lastname'))
+
+    def test_firstname_attr_exists(self):
+        obj = User()
+        self.assertTrue(hasattr(obj, 'firstname'))
+
+    def test_password_attr_exists(self):
+        obj = User()
+        self.assertTrue(hasattr(obj, 'password'))
+
     def test_instance_id_is_str(self):
         "tests that an instance's id is a string"
         self.assertEqual(str, type(User().id))
