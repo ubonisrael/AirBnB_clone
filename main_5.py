@@ -14,3 +14,6 @@ class FileStorage(FileStorage):
         """
         pass
 
+if __name__ == '__main__':
+    fs = FileStorage()
+    print(type(fs.reload))

@@ -100,6 +100,22 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(AttributeError):
             models.storage.new(None)
 
+    def test_save_exists(self):
+        bm = BaseModel()
+        us = User()
+        st = State()
+        pl = Place()
+        cy = City()
+        am = Amenity()
+        rv = Review()
+        self.assertTrue(hasattr(bm, 'save'))
+        self.assertTrue(hasattr(us, 'save'))
+        self.assertTrue(hasattr(st, 'save'))
+        self.assertTrue(hasattr(pl, 'save'))
+        self.assertTrue(hasattr(cy, 'save'))
+        self.assertTrue(hasattr(am, 'save'))
+        self.assertTrue(hasattr(rv, 'save'))
+
     def test_save(self):
         bm = BaseModel()
         us = User()
@@ -130,6 +146,22 @@ class TestFileStorage_methods(unittest.TestCase):
     def test_save_with_arg(self):
         with self.assertRaises(TypeError):
             models.storage.save(None)
+
+    def test_reload_exists(self):
+        bm = BaseModel()
+        us = User()
+        st = State()
+        pl = Place()
+        cy = City()
+        am = Amenity()
+        rv = Review()
+        self.assertTrue(hasattr(bm, 'reload'))
+        self.assertTrue(hasattr(us, 'reload'))
+        self.assertTrue(hasattr(st, 'reload'))
+        self.assertTrue(hasattr(pl, 'reload'))
+        self.assertTrue(hasattr(cy, 'reload'))
+        self.assertTrue(hasattr(am, 'reload'))
+        self.assertTrue(hasattr(rv, 'reload'))
 
     def test_reload(self):
         bm = BaseModel()
