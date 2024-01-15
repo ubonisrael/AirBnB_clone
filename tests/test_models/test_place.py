@@ -5,6 +5,7 @@ import os
 import sys
 import unittest
 from datetime import datetime
+from models.base_model import BaseModel
 from models.place import Place
 from models import storage
 from time import sleep
@@ -12,6 +13,9 @@ from time import sleep
 
 class TestPlace_Init(unittest.TestCase):
     """Tests for the initialization of the Place class"""
+    def test_subclass(self):
+        self.assertTrue(issubclass(Place, BaseModel))
+
     def test_instance_type(self):
         """tests that the instance is of Place"""
         self.assertEqual(Place, type(Place()))
