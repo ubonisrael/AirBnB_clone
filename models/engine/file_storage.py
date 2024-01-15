@@ -20,7 +20,8 @@ class FileStorage():
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
         if self.__objects is None or len(self.__objects) == 0:
-            return
+            with open("{}".format(self.__file_path), "w", encoding="utf-8") as f:
+                f.write(dumps({}))
 
         json_obj = {}
         for i in self.__objects:
