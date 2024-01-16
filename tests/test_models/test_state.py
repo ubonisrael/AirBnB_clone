@@ -5,6 +5,7 @@ import os
 import sys
 import unittest
 from datetime import datetime
+from models.base_model import BaseModel
 from models.state import State
 from models import storage
 from time import sleep
@@ -12,6 +13,9 @@ from time import sleep
 
 class TestState_Init(unittest.TestCase):
     """Tests for the initialization of the State class"""
+    def test_subclass(self):
+        self.assertTrue(issubclass(State, BaseModel))
+
     def test_instance_type(self):
         """tests that the instance is of State"""
         self.assertEqual(State, type(State()))

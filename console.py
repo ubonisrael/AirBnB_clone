@@ -35,7 +35,10 @@ class HBNBCommand(cmd.Cmd):
         if method == "update" and attr_or_dict:
             match_dict = re.search('^({.*})$', attr_or_dict)
             if match_dict:
-                self.update_dict(class_name, uid, match_dict.group(1))
+                print(match_dict.group(1))
+                # self.update_dict(class_name, uid, match_dict.group(1))
+                for k in match_dict.group(1):
+                    print(k)
                 return ""
             match_attr_and_value = re.search(
                 '^(?:"([^"]*)")?(?:, (.*))?$', attr_or_dict)

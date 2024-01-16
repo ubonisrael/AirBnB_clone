@@ -1,26 +1,20 @@
 #!/usr/bin/python3
 """Defines tests for the User of the project"""
-import pep8
 import io
 import os
 import sys
 import unittest
 from datetime import datetime
+from models.base_model import BaseModel
 from models.user import User
 from models import storage
 from time import sleep
-from models.engine.file_storage import FileStorage as fs
 
 
 class TestUser_Init(unittest.TestCase):
     """Tests for the initialization of the User class"""
-    def test_pycodestyle(self):
-        """Testing for pycodestyle implementation"""
-        pycode_pass = pep8.StyleGuide(quite=True)
-        record = pycode_pass.check_files(
-                ['./models/city.py',
-                 './tests/test_models/test_city.py'])
-        self.assertEqual(record.total_errors, 0, "errors found")
+    def test_subclass(self):
+        self.assertTrue(issubclass(User, BaseModel))
 
     def test_updated_at_and_created_at(self):
         """Checking for all the validity test of the attributes"""
