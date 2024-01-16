@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Defines tests for the User of the project"""
+import pep8
 import io
 import os
 import sys
@@ -8,10 +9,37 @@ from datetime import datetime
 from models.user import User
 from models import storage
 from time import sleep
+from models.engine.file_storage import FileStorage as fs
 
 
 class TestUser_Init(unittest.TestCase):
     """Tests for the initialization of the User class"""
+    def test_pycodestyle(self):
+        """Testing for pycodestyle implementation"""
+        pycode_pass = pep8.StyleGuide(quite=True)
+        record = pycode_pass.check_files(
+                ['./models/city.py',
+                 './tests/test_models/test_city.py'])
+        self.assertEqual(record.total_errors, 0, "errors found")
+
+    def test_updated_at_and_created_at(self):
+        """Checking for all the validity test of the attributes"""
+        obj1 = User()
+        obj2 = User()
+        self.assertNotEqual(obj1.updated_at, obj2.updated_at)
+        self.assertNotEqual(obj1.created_at, obj2.created_at)
+        old = obj1
+        new = obj1.save()
+        self.assertNotEqual(old, new)
+
+    def test_id_of_different_instances(self):
+        """Testing the ids of two different instances"""
+        obj1 = User()
+        obj2 = User()
+        self.assertTrue(obj1.id, str)
+        self.assertTrue(obj2.id, str)
+        self.assertNotEqual(obj1.id, obj2.id)
+
     def test_doc_string(self):
         self.assertIsNotNone(User().__doc__)
 
