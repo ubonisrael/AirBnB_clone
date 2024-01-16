@@ -18,11 +18,15 @@ class TestUser_Init(unittest.TestCase):
     def test_city_attributes(self):
         """Checking for all the valid attributes"""
         obj = User()
-        obj.name = "Flow"
-        obj.state_id = "11-11-111"
-        self.assertTrue(hasattr(obj, "name"))
-        self.assertTrue(hasattr(obj, "state_id"))
-        self.assertNotEqual(obj.__dict__["name"], "Vax")
+        obj.first_name = "Flow"
+        obj.last_name = "Example"
+        obj.email = "flow@example.com"
+        obj.password = "whoKnows"
+        self.assertTrue(hasattr(obj, "first_name"))
+        self.assertTrue(hasattr(obj, "last_name"))
+        self.assertTrue(hasattr(obj, "email"))
+        self.assertTrue(hasattr(obj, "password"))
+        self.assertNotEqual(obj.__dict__["first_name"], "Vax")
         self.assertEqual(type(obj.updated_at), type(datetime.now()))
 
     def test_instance_type(self):
@@ -130,6 +134,19 @@ class TestUser_Init(unittest.TestCase):
         self.assertIn("'created_at': " + date_repr, objstr)
         self.assertIn("'updated_at': " + date_repr, objstr)
 
+    def test_string_format_method(self):
+        """Checking for the string format matches the expected criteria"""
+        obj = User()
+        self.assertEqual(obj.__str__(),
+                         f"[{type(obj).__name__}] ({obj.id}) {obj.__dict__}")
+        k = obj.to_dict()
+        us = User(**k)
+        self.assertEqual(us.__str__(),
+                         f"[{us.__class__.__name__}] ({us.id}) {us.__dict__}")
+        self.assertTrue(obj.__str__(), us.__str__())
+        us.first_name = "drihman"
+        self.assertNotEqual(obj.__str__(), us.__str__())
+
 
 class TestUser_Save(unittest.TestCase):
     """Tests the save method of the User class"""
@@ -230,7 +247,6 @@ class TestUser_to_dict(unittest.TestCase):
         obj = User()
         with self.assertRaises(TypeError):
             obj.to_dict(None)
-
 
 if __name__ == "__main__":
     unittest.main()
