@@ -15,6 +15,16 @@ class TestUser_Init(unittest.TestCase):
     def test_doc_string(self):
         self.assertIsNotNone(User().__doc__)
 
+    def test_city_attributes(self):
+        """Checking for all the valid attributes"""
+        obj = User()
+        obj.name = "Flow"
+        obj.state_id = "11-11-111"
+        self.assertTrue(hasattr(obj, "name"))
+        self.assertTrue(hasattr(obj, "state_id"))
+        self.assertNotEqual(obj.__dict__["name"], "Vax")
+        self.assertEqual(type(obj.updated_at), type(datetime.now()))
+
     def test_instance_type(self):
         """tests that the instance is of User"""
         self.assertEqual(User, type(User()))
