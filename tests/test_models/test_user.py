@@ -12,6 +12,9 @@ from time import sleep
 
 class TestUser_Init(unittest.TestCase):
     """Tests for the initialization of the User class"""
+    def test_doc_string(self):
+        self.assertIsNotNone(User().__doc__)
+
     def test_instance_type(self):
         """tests that the instance is of User"""
         self.assertEqual(User, type(User()))
