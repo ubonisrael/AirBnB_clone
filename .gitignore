@@ -1,1 +1,3 @@
-WC3-Validator/
+W3C-Validator/
+__pycache__/
+w3c_validator.py
